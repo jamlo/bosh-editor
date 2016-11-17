@@ -10,6 +10,7 @@ SwaggerEditor.service('KeywordMap', function KeywordMap(defaults) {
    * This is necessary because JSON Schema completion map has recursive
    * pointers
   */
+  // jscs:disable
   /* eslint quote-props: ["error", "as-needed", { "keywords": false, "unnecessary": false }]*/
   var JSONSchema = function() {
     _.extend(this,
@@ -60,178 +61,63 @@ SwaggerEditor.service('KeywordMap', function KeywordMap(defaults) {
     );
   };
 
-  var jsonSchema = new JSONSchema();
-  var schemes = [
-    'http',
-    'https',
-    'ws',
-    'wss'
-  ];
-
-  var externalDocs = {
-    description: String,
-    url: String
-  };
-
-  var mimeTypes = [
-    'text/plain',
-    'text/html',
-    'text/xml',
-    'text/csv',
-    'application/json',
-    'application/octet-stream',
-    'application/xml',
-    'application/vnd.',
-    'application/pdf',
-    'audio/',
-    'image/jpeg',
-    'image/gif',
-    'image/png',
-    'multipart/form-data',
-    'video/avi',
-    'video/mpeg',
-    'video/ogg',
-    'video/mp4'
-  ];
-
-  var header = {
+  var release = {
     name: String,
-    description: String
+    version: String
   };
 
-  var parameter = {
+  var stemcell = {
+    alias: String,
+    os: String,
     name: String,
-    in: [
-      'body',
-      'formData',
-      'header',
-      'path',
-      'query'
-    ],
-    description: String,
-    required: ['true', 'false'],
-    type: [
-      'string',
-      'number',
-      'boolean',
-      'integer',
-      'array'
-    ],
-    format: String,
-    schema: jsonSchema
+    version: String
   };
 
-  var security = {
-    '.': String
+  var updateBlock = {
+    canaries: String,
+    max_in_flight: String,
+    canary_watch_time: String,
+    update_watch_time: String,
+    serial: Boolean
   };
 
-  var response = {
-    description: String,
-    schema: jsonSchema,
-    headers: {
-      '.': header
-    },
-    examples: mimeTypes
-  };
-
-  var operation = {
-    summary: String,
-    description: String,
-    schemes: {
-      '.': schemes
-    },
-    externalDocs: externalDocs,
-    operationId: String,
-    produces: {
-      '.': mimeTypes
-    },
-    consumes: {
-      '.': mimeTypes
-    },
-    deprecated: Boolean,
-    security: security,
-    parameters: [parameter],
-    responses: {
-      '.': response
-    },
-    tags: [String]
-  };
-
-  var securityDefinition = {
-    type: ['oauth2', 'apiKey', 'basic'],
+  var job = {
     name: String,
-    flow: ['application', 'implicit', 'accessCode'],
-    scopes: String,
-    tokenUrl: String,
-    authorizationUrl: String,
-    description: String
+    release: String,
+    consumes: Object,
+    provides: Object,
+    properties: Object
+  };
+
+  var network = {
+    name: String,
+    static_ips: [String],
+    "default": [String]
+  };
+
+  var instance_group = {
+    name: String,
+    instances: Number,
+    lifecycle: String,
+    azs: [String],
+    vm_type: String,
+    vm_extensions: [String],
+    stemcell: String,
+    migrated_from: String,
+    networks: [network],
+    jobs: [job]
   };
 
   var map = {
-    swagger: ['"2.0"'],
-    info: {
-      version: [
-        '1.0.0',
-        '0.0.0',
-        '0.0.1',
-        'something-we-all-get'
-      ],
-      title: String,
-      description: String,
-      termsOfService: String,
-      contact: {
-        name: String,
-        url: String,
-        email: String
-      },
-      license: {
-        name: String,
-        url: String
-      }
-    },
-
-    host: String,
-    basePath: String,
-
-    schemes: [schemes],
-    produces: [mimeTypes],
-    consumes: [mimeTypes],
-
-    paths: {
-
-      // path
-      '^/.?': {
-        'parameters': [parameter],
-        'get|put|post|delete|options|head|patch': operation
-      }
-    },
-
-    definitions: {
-
-      // Definition name
-      '.': jsonSchema
-    },
-
-    parameters: [parameter],
-    responses: {
-      '[2-6][0-9][0-9]': response
-    },
-    security: {
-      '.': {
-        '.': String
-      }
-    },
-    securityDefinitions: {
-      '.': securityDefinition
-    },
-    tags: [{
-      name: String,
-      description: String
-    }],
-    externalDocs: {
-      '.': externalDocs
-    }
+    name: String,
+    director_uuid: String,
+    releases: [release],
+    stemcells: [stemcell],
+    update: updateBlock,
+    instance_groups: [instance_group]
   };
+
+  // jscs:enable
 
   this.get = function() {
     var extension = angular.isObject(defaults.autocompleteExtension) ?

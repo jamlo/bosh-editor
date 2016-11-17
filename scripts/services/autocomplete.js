@@ -26,6 +26,12 @@ SwaggerEditor.service('Autocomplete', function($rootScope, snippets,
       getPathForPosition(pos, prefix).then(function(path) {
         // These function might shift or push to paths, therefore we're passing
         // a clone of path to them
+
+        if (isNumber(_.last(path))) {
+          path.pop();
+          path.push(0);
+        }
+
         var keywordsForPos = getKeywordsForPosition(_.clone(path));
         var snippetsForPos = getSnippetsForPosition(_.clone(path));
 
@@ -74,6 +80,17 @@ SwaggerEditor.service('Autocomplete', function($rootScope, snippets,
       meta: 'snippet'
     };
   };
+
+  /*
+   * Check if the parameter is a number
+   *
+   * @param {object}
+   *
+   * @return {Boolean} - True if a number, else false
+  */
+  function isNumber(n) {
+    return !isNaN(parseFloat(n)) && isFinite(n);
+  }
 
   /**
    * Gets keyword path for specified position

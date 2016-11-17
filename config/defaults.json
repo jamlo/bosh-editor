@@ -7,10 +7,10 @@
   },
   "analytics": {
     "google": {
-      "id": "UA-51231036-1"
+      "id": "helloooooooo"
     }
   },
-  "disableCodeGen": false,
+  "disableCodeGen": true,
   "examplesFolder": "spec-files/",
   "editorOptions": {
     "theme": "ace/theme/atom_dark"

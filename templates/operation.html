@@ -191,27 +191,4 @@
         </tbody>
       </table>
     </section>
-
-    <section class="try-operation" ng-if="enableTryIt">
-
-      <button class="border-only try-it"
-        ng-class="{trying: isTryOpen}"
-        ng-click="toggleTry()"
-        ng-if="!isTryOpen"
-        track-event="try-operation">
-        Try this operation
-      </button>
-
-      <button class="border-only red close-try"
-        ng-class="{'is-open': isTryOpen}"
-        ng-click="toggleTry()"
-        ng-if="isTryOpen">
-        Close
-      </button>
-
-      <div
-        ng-include="'templates/try-operation.html'"
-        ng-if="isTryOpen">
-      </div>
-    </section>
 </li>
