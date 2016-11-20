@@ -1,0 +1,32 @@
+<!--==================================================================-->
+<!--Stemcells-->
+<header ng-if="specs.stemcells.length > 0">
+  <h3 class="section-header">
+    <a ng-click="
+          specs.stemcells.$folded = !specs.stemcells.$folded;
+          foldEditor(['stemcells'], specs.stemcells.$folded);">
+
+      <span><strong>Stemcells ({{specs.stemcells.length}})</strong></span>
+    </a>
+  </h3>
+</header>
+
+<ul
+  class="list-group"
+  collapse-when="specs.stemcells.$folded"
+  ng-if="specs.stemcells.length > 0">
+  <li
+    class="list-group-item"
+    ng-class-even="'list-group-item-info'"
+    ng-class-odd="'list-group-item-success'"
+    ng-repeat="stemcell in specs.stemcells">
+    <span class="badge stemcell-label">{{stemcell.version}}</span>
+    <span class="label label-primary stemcell-label"><strong>Alias:</strong> {{stemcell.alias}}</span>
+    <span ng-if="stemcell.name">
+        <span class="label label-warning stemcell-label"><strong>Name:</strong> {{stemcell.name}}</span>
+      </span>
+    <span ng-if="stemcell.os">
+        <span class="label label-danger stemcell-label"><strong>OS:</strong> {{stemcell.os}}</span>
+      </span>
+  </li>
+</ul>

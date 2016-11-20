@@ -153,6 +153,14 @@ SwaggerEditor.controller('HeaderCtrl', function HeaderCtrl($scope, $uibModal,
     });
   };
 
+  $scope.chooseMode = function() {
+    $uibModal.open({
+      template: require('templates/choose-mode.html'),
+      controller: 'ChooseModeCtrl',
+      size: 'large'
+    });
+  };
+
   $scope.openPreferences = function() {
     $uibModal.open({
       template: require('templates/preferences.html'),

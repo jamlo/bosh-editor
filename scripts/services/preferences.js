@@ -28,6 +28,11 @@ SwaggerEditor.service('Preferences', function Preferences($localStorage,
     autoComplete: true,
 
     /*
+     * Auto-complete mpde.
+     */
+    autoCompleteMode: defaults.autoCompleteMode,
+
+    /*
      * Wait time for editor to react to keyboard events
     */
     keyPressDebounceTime: defaults.keyPressDebounceTime,

@@ -1,0 +1,33 @@
+<!--==================================================================-->
+<!--Update Block-->
+<header ng-if="specs.update">
+  <h3 class="section-header">
+    <a ng-click="
+          specs.update.$folded = !specs.update.$folded;
+          foldEditor(['update'], specs.update.$folded);">
+
+      <span><strong>Update Block</strong></span>
+    </a>
+  </h3>
+</header>
+
+<ul
+  class="list-group"
+  collapse-when="specs.update.$folded"
+  ng-if="specs.update">
+  <li class="list-group-item">
+    <strong>canaries: </strong> {{specs.update.canaries}}
+  </li>
+  <li class="list-group-item">
+    <strong>max_in_flight: </strong> {{specs.update.max_in_flight}}
+  </li>
+  <li class="list-group-item">
+    <strong>canary_watch_time: </strong> {{specs.update.canary_watch_time}}
+  </li>
+  <li class="list-group-item">
+    <strong>update_watch_time: </strong> {{specs.update.update_watch_time}}
+  </li>
+  <li class="list-group-item">
+    <strong>serial: </strong> {{specs.update.serial}}
+  </li>
+</ul>

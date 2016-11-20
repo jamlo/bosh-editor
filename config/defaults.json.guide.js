@@ -88,6 +88,11 @@ var defaults = {
   useBackendForStorage: false,
 
   /*
+   * Change the default auto-complete mode
+   */
+  autoCompleteMode: 'deployment-manifest',
+
+  /*
    * Change how many milliseconds after the last keypress the editor should
    * respond to change.
   */

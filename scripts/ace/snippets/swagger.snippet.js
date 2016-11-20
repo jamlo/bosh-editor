@@ -1,7 +1,14 @@
 'use strict';
 
+var _ = require('lodash');
+
 SwaggerEditor.config(function($provide) {
 
+  /**
+   * ================================================================================
+   * ================================================================================
+   * Deployment Manifest Snippets
+   */
   function makeReleasesSnippet() {
     return [
       'releases:',
@@ -116,61 +123,175 @@ SwaggerEditor.config(function($provide) {
     ];
   }
 
-  $provide.constant('snippets', [
-    {
-      name: 'releases',
-      trigger: 'rel',
-      path: [],
-      content: makeReleasesSnippet().join('\n')
-    },
+  function generateDeploymentManifestSnippets() {
+    var deploymentManifestSnippets = [
+      {
+        name: 'releases',
+        trigger: 'rel',
+        path: [],
+        content: makeReleasesSnippet().join('\n')
+      },
 
-    {
-      name: 'releases (Descriptions)',
-      trigger: 'rel',
-      path: [],
-      content: makeReleasesDescriptionsSnippet().join('\n')
-    },
+      {
+        name: 'releases (+)',
+        trigger: 'rel',
+        path: [],
+        content: makeReleasesDescriptionsSnippet().join('\n')
+      },
 
-    {
-      name: 'stemcells',
-      trigger: 'ste',
-      path: [],
-      content: makeStemcellsSnippet().join('\n')
-    },
+      {
+        name: 'stemcells',
+        trigger: 'ste',
+        path: [],
+        content: makeStemcellsSnippet().join('\n')
+      },
 
-    {
-      name: 'stemcells (Descriptions)',
-      trigger: 'ste',
-      path: [],
-      content: makeStemcellsDescriptionsSnippet().join('\n')
-    },
+      {
+        name: 'stemcells (+)',
+        trigger: 'ste',
+        path: [],
+        content: makeStemcellsDescriptionsSnippet().join('\n')
+      },
 
-    {
-      name: 'update',
-      trigger: 'upd',
-      path: [],
-      content: makeUpdateSnippet().join('\n')
-    },
+      {
+        name: 'update',
+        trigger: 'upd',
+        path: [],
+        content: makeUpdateSnippet().join('\n')
+      },
 
-    {
-      name: 'update (Descriptions)',
-      trigger: 'upd',
-      path: [],
-      content: makeUpdateDescriptionSnippet().join('\n')
-    },
+      {
+        name: 'update (+)',
+        trigger: 'upd',
+        path: [],
+        content: makeUpdateDescriptionSnippet().join('\n')
+      },
 
-    {
-      name: 'instance_groups',
-      trigger: 'ins',
-      path: [],
-      content: makeInstanceGroupSnippet().join('\n')
-    },
+      {
+        name: 'instance_groups',
+        trigger: 'ins',
+        path: [],
+        content: makeInstanceGroupSnippet().join('\n')
+      },
 
-    {
-      name: 'instance_groups (Descriptions)',
-      trigger: 'ins',
-      path: [],
-      content: makeInstanceGroupDescriptionSnippet().join('\n')
-    }
-  ]);
+      {
+        name: 'instance_groups (+)',
+        trigger: 'ins',
+        path: [],
+        content: makeInstanceGroupDescriptionSnippet().join('\n')
+      }
+    ];
+
+    deploymentManifestSnippets.forEach(function(element) {
+      element.mode = "deployment-manifest";
+    });
+
+    return deploymentManifestSnippets;
+  }
+
+  /**
+   * ================================================================================
+   * ================================================================================
+   * Runtime Config Snippets
+   */
+  function rcMakeReleasesSnippet() {
+    return [
+      'releases:',
+      '- name: ${1}',
+      '  version: ${2}'
+    ];
+  }
+
+  function rcMakeReleasesDescriptionSnipppet() {
+    return [
+      '#Schema: http://bosh.io/docs/runtime-config.html#releases',
+      'releases: # [Array, required]: Specifies the releases used by the addons.',
+      '- name: ${1} # [String, required]: Name of a release name used by an addon.',
+      '  version: ${2} # [String, required]: The version of the release to use. Version cannot be latest; it must be specified explicitly.'
+    ];
+  }
+
+  function rcMakeAddonsSnippet() {
+    return [
+      'addons:',
+      '- name: ${1}',
+      '  jobs:',
+      '  - name: ${2}',
+      '    release: ${3}',
+      '    properties: ${4}',
+      '  include: ${5}',
+      '    deployments: []',
+      '    jobs:',
+      '    - name: ${6}',
+      '      release: ${7}',
+      '    stemcell:',
+      '      os: ${8}',
+      '  properties: ${9}'
+    ];
+  }
+
+  function rcMakeAddonsDescriptionSnippet() {
+    return [
+      '#Schema: http://bosh.io/docs/runtime-config.html#addons',
+      'addons: # [Array, optional]: Specifies the addons to be applied to all deployments.',
+      '- name: ${1} # [String, required]: A unique name used to identify and reference the addon.',
+      '  jobs: # [Hash, requires]: Specifies the name and release of release jobs to be colocated.',
+      '  - name: ${2} # [String, required]: The job name.',
+      '    release: ${3} #  [String, required]: The release where the job exists.',
+      '    properties: ${4}',
+      '  include: ${5} # [Hash, optional]: Specifies placement rules. (Rules for exclusions are coming soon.) Available in bosh-release v260+.',
+      '    deployments: []',
+      '    jobs:',
+      '    - name: ${6}',
+      '      release: ${7}',
+      '    stemcell:',
+      '      os: ${8}',
+      '  properties: ${9} # [Hash, optional]: Specifies job properties. properties specified on an addon are only accessible to addons.'
+    ];
+  }
+
+  function generateCloudConfigSnippets() {
+    var cloudConfigSnippets = [
+      {
+        name: 'releases',
+        trigger: 'rel',
+        path: [],
+        content: rcMakeReleasesSnippet().join('\n')
+      },
+
+      {
+        name: 'releases (+)',
+        trigger: 'rel',
+        path: [],
+        content: rcMakeReleasesDescriptionSnipppet().join('\n')
+      },
+
+      {
+        name: 'addons',
+        trigger: 'add',
+        path: [],
+        content: rcMakeAddonsSnippet().join('\n')
+      },
+
+      {
+        name: 'addons (+)',
+        trigger: 'add',
+        path: [],
+        content: rcMakeAddonsDescriptionSnippet().join('\n')
+      }
+    ];
+
+    cloudConfigSnippets.forEach(function(element) {
+      element.mode = "runtime-config";
+    });
+
+    return cloudConfigSnippets;
+  }
+
+  var allSnippets =_.concat(
+    generateDeploymentManifestSnippets(),
+    generateCloudConfigSnippets()
+  );
+
+  $provide.constant('snippets', allSnippets);
 });

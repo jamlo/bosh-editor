@@ -33,7 +33,7 @@ SwaggerEditor.service('Autocomplete', function($rootScope, snippets,
         }
 
         var keywordsForPos = getKeywordsForPosition(_.clone(path));
-        var snippetsForPos = getSnippetsForPosition(_.clone(path));
+        var snippetsForPos = getSnippetsForPosition(_.clone(path), Preferences.get("autoCompleteMode"));
 
         if (_.last(path) === '$ref') {
           return get$refs().then(function($refs) {
@@ -271,14 +271,16 @@ SwaggerEditor.service('Autocomplete', function($rootScope, snippets,
    * Gets array of snippets based on a position
    *
    * @param {array} path - the path to get snippets from
+   * @param {String} autoCompleteMode - the current auto-complete mode
    *
    * @return {array} - list of snippets for provided position
   */
-  function getSnippetsForPosition(path) {
+  function getSnippetsForPosition(path, autoCompleteMode) {
     // find all possible snippets, modify them to be compatible with Ace and
     // sort them based on their position. Sorting is done by assigning a score
     // to each snippet, not by sorting the array
     return snippets
+      .filter(function (snippet) { return snippet.mode === autoCompleteMode })
       .filter(filterForSnippets(path))
       .map(constructAceSnippet)
       .map(snippetSorterForPos(path));

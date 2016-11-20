@@ -64,6 +64,18 @@ $(function() {
       $templateCache.put('templates/path.html',
         require('templates/path.html'));
 
+      $templateCache.put('templates/releases.html',
+        require('templates/releases.html'));
+
+      $templateCache.put('templates/stemcells.html',
+        require('templates/stemcells.html'));
+
+      $templateCache.put('templates/update-block.html',
+        require('templates/update-block.html'));
+
+      $templateCache.put('templates/choose-mode.html',
+        require('templates/choose-mode.html'));
+
       $templateCache.put('templates/preferences.html',
         require('templates/preferences.html'));
 

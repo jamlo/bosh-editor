@@ -1,0 +1,25 @@
+<!--==================================================================-->
+<!--Releases-->
+<header ng-if="specs.releases.length > 0">
+  <h3 class="section-header">
+    <a ng-click="
+          specs.releases.$folded = !specs.releases.$folded;
+          foldEditor(['releases'], specs.releases.$folded);">
+
+      <span><strong>Releases ({{specs.releases.length}})</strong></span>
+    </a>
+  </h3>
+</header>
+<ul
+  class="list-group"
+  collapse-when="specs.releases.$folded"
+  ng-if="specs.releases.length > 0">
+  <li
+    class="list-group-item"
+    ng-class-even="'list-group-item-info'"
+    ng-class-odd="'list-group-item-success'"
+    ng-repeat="release in specs.releases">
+    <span class="badge release-label">{{release.version}}</span>
+    <span class="release-label"><strong>{{release.name}}</strong></span>
+  </li>
+</ul>

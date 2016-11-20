@@ -3,64 +3,13 @@
 var _ = require('lodash');
 var angular = require('angular');
 
-SwaggerEditor.service('KeywordMap', function KeywordMap(defaults) {
-  /*
-   * JSON Schema completion map constructor
-   *
-   * This is necessary because JSON Schema completion map has recursive
-   * pointers
-  */
-  // jscs:disable
-  /* eslint quote-props: ["error", "as-needed", { "keywords": false, "unnecessary": false }]*/
-  var JSONSchema = function() {
-    _.extend(this,
-      {
-        title: String,
-        type: String,
-        format: String,
-        default: this,
-        description: String,
-        enum: [String],
-        minimum: String,
-        maximum: String,
-        exclusiveMinimum: String,
-        exclusiveMaximum: String,
-        multipleOf: String,
-        maxLength: String,
-        minLength: String,
-        pattern: String,
-        not: String,
+SwaggerEditor.service('KeywordMap', function KeywordMap(Preferences, defaults) {
 
-        // jscs:disable
-        '$ref': String,
-        // jscs:enable
-
-        definitions: {
-          '.': this
-        },
-
-        // array specific keys
-        items: [this],
-        minItems: String,
-        maxItems: String,
-        uniqueItems: String,
-        additionalItems: [this],
-
-        // object
-        maxProperties: String,
-        minProperties: String,
-        required: String,
-        additionalProperties: String,
-        allOf: [this],
-        properties: {
-
-          // property name
-          '.': this
-        }
-      }
-    );
-  };
-
+  /**
+   * ========================================================================================
+   * ========================================================================================
+   * Deployment Manifest Schema
+   */
   var release = {
     name: String,
     version: String
@@ -108,7 +57,7 @@ SwaggerEditor.service('KeywordMap', function KeywordMap(defaults) {
     jobs: [job]
   };
 
-  var map = {
+  var deploymentManifestMap = {
     name: String,
     director_uuid: String,
     releases: [release],
@@ -117,11 +66,53 @@ SwaggerEditor.service('KeywordMap', function KeywordMap(defaults) {
     instance_groups: [instance_group]
   };
 
+  /**
+   * ========================================================================================
+   * ========================================================================================
+   * Runtime Config Schema
+   */
+  var rc_release = {
+    name: String,
+    version: String
+  };
+
+  var rc_job = {
+    name: String,
+    release: String
+  };
+
+  var rc_addon = {
+    name: String,
+    jobs: [rc_job],
+    include: Object,
+    properties: Object
+  };
+
+  var runtimeConfigMap = {
+    releases: [rc_release],
+    addons: [rc_addon],
+    tags: Object
+  };
+
   // jscs:enable
 
   this.get = function() {
+    var choosenMode = Preferences.get("autoCompleteMode");
+    var choosenMap = [];
+
+    switch (choosenMode) {
+      case "deployment-manifest":
+        choosenMap = deploymentManifestMap;
+        break;
+      case "runtime-config":
+        choosenMap = runtimeConfigMap;
+        break;
+      default:
+        console.log("Sorry, mode '" + choosenMode + "' is not supported.");
+    }
+
     var extension = angular.isObject(defaults.autocompleteExtension) ?
       defaults.autocompleteExtension : {};
-    return _.extend(map, extension);
+    return _.extend(choosenMap, extension);
   };
 });

@@ -27,6 +27,11 @@
     "instagram.yaml",
     "twitter.yaml"
   ],
+  "autoCompleteMode" : "deployment-manifest",
+  "autoCompleteModes": [
+    "deployment-manifest",
+    "runtime-config"
+  ],
   "autocompleteExtension": {},
   "useBackendForStorage": false,
   "backendThrottle": 200,
