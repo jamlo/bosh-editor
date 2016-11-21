@@ -23,12 +23,12 @@
           <a dropdown-toggle id="open-example" ng-click="openExamples()" tabindex="-1" track-event="file open-example"><i class="fa fa-folder-open highlighted"></i>&nbsp;<span>Open Example&hellip;</span></a>
         </li>
         <li class="divider"></li>
-        <li>
-          <a dropdown-toggle ng-click="openPasteJSON()" tabindex="-1" track-event="file paste-json"><i class="fa fa-clipboard"></i>&nbsp;<span>Paste JSON&hellip;</span></a>
-        </li>
-        <li>
-          <a dropdown-toggle ng-click="openImportUrl()" tabindex="-1" track-event="file import url"><i class="fa fa-link"></i>&nbsp;<span>Import URL&hellip;</span></a>
-        </li>
+        <!--<li>-->
+          <!--<a dropdown-toggle ng-click="openPasteJSON()" tabindex="-1" track-event="file paste-json"><i class="fa fa-clipboard"></i>&nbsp;<span>Paste JSON&hellip;</span></a>-->
+        <!--</li>-->
+        <!--<li>-->
+          <!--<a dropdown-toggle ng-click="openImportUrl()" tabindex="-1" track-event="file import url"><i class="fa fa-link"></i>&nbsp;<span>Import URL&hellip;</span></a>-->
+        <!--</li>-->
         <li>
           <a dropdown-toggle ng-click="openImportFile()" tabindex="-1" track-event="file import file"><i class="fa fa-file highlighted"></i>&nbsp;<span>Import File&hellip;</span></a>
         </li>
@@ -37,10 +37,10 @@
           <a download="swagger.yaml" data-downloadurl="{{yamlDownloadUrl}}"
             href="{{yamlDownloadHref}}" tabindex="-1" track-event="file download yaml"><i class="fa fa-download"></i>&nbsp;<span>Download YAML</span></a>
         </li>
-        <li>
-          <a download="swagger.json" downloadUrl="{{jsonDownloadUrl}}"
-            href="{{jsonDownloadHref}}" tabindex="-1" track-event="file download json"><i class="fa fa-download"></i>&nbsp;<span>Download JSON</span></a>
-        </li>
+        <!--<li>-->
+          <!--<a download="swagger.json" downloadUrl="{{jsonDownloadUrl}}"-->
+            <!--href="{{jsonDownloadHref}}" tabindex="-1" track-event="file download json"><i class="fa fa-download"></i>&nbsp;<span>Download JSON</span></a>-->
+        <!--</li>-->
       </ul>
     </div>
 
@@ -96,30 +96,30 @@
 
       <ul class="dropdown-menu" uib-dropdown-menu>
         <li>
-          <a tabindex="-1" href="https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md" target="_blank">
+          <a tabindex="-1" href="https://bosh.io/docs" target="_blank">
             <i class="fa fa-align-justify"></i>&nbsp;
-            <span>Swagger 2.0 Specs</span>
+            <span>BOSH Docs</span>
           </a>
         </li>
         <li>
-          <a tabindex="-1" href="http://swagger.io/" target="_blank">
+          <a tabindex="-1" href="https://bosh.io/" target="_blank">
             <i class="fa fa-share-square-o"></i>&nbsp;
-            <span>Swagger Website</span>
+            <span>BOSH Website</span>
           </a>
         </li>
         <li>
           <a dropdown-toggle tabindex="-1" ng-click="openAbout()">
             <i class="fa fa-info-circle"></i>&nbsp;
-            <span>About Swagger Editor</span>
+            <span>About BOSH Editor</span>
           </a>
         </li>
-        <li class="divider"></li>
-        <li>
-          <a href="https://github.com/swagger-api/swagger-editor/issues/new?labels=From%20Editor" target="_blank">
-            <i class="fa fa-bug highlighted"></i>&nbsp;
-            <span>Report A Bug</span>
-          </a>
-        </li>
+        <!--<li class="divider"></li>-->
+        <!--<li>-->
+          <!--<a href="https://github.com/swagger-api/swagger-editor/issues/new?labels=From%20Editor" target="_blank">-->
+            <!--<i class="fa fa-bug highlighted"></i>&nbsp;-->
+            <!--<span>Report A Bug</span>-->
+          <!--</a>-->
+        <!--</li>-->
         <li class="divider"></li>
         <li>
           <a dropdown-toggle ng-click="toggleAboutEditor(true)" tabindex="-1">

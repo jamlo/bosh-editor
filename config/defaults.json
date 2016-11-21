@@ -16,16 +16,8 @@
     "theme": "ace/theme/atom_dark"
   },
   "exampleFiles": [
-    "default.yaml",
-    "heroku-pets.yaml",
-    "minimal.yaml",
-    "echo.yaml",
-    "petstore_simple.yaml",
-    "petstore_full.yaml",
-    "basic-auth.yaml",
-    "security.yaml",
-    "instagram.yaml",
-    "twitter.yaml"
+    "jmeter-storm-mode.yaml",
+    "jmeter-tornado-mode.yaml"
   ],
   "autoCompleteMode" : "deployment-manifest",
   "autoCompleteModes": [

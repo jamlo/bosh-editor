@@ -193,17 +193,17 @@ SwaggerEditor.controller('HeaderCtrl', function HeaderCtrl($scope, $uibModal,
       }
 
       var assign = function(yaml, json) {
-        // swagger and version should be a string to comfort with the schema
-        if (json.info.version) {
-          json.info.version = String(json.info.version);
-        }
-        if (json.swagger) {
-          if (json.swagger === 2) {
-            json.swagger = '2.0';
-          } else {
-            json.swagger = String(json.swagger);
-          }
-        }
+        // // swagger and version should be a string to comfort with the schema
+        // if (json.info.version) {
+        //   json.info.version = String(json.info.version);
+        // }
+        // if (json.swagger) {
+        //   if (json.swagger === 2) {
+        //     json.swagger = '2.0';
+        //   } else {
+        //     json.swagger = String(json.swagger);
+        //   }
+        // }
 
         json = JSON.stringify(json, null, 4);
         var jsonBlob = new Blob([json], {type: MIME_TYPE});
@@ -219,7 +219,7 @@ SwaggerEditor.controller('HeaderCtrl', function HeaderCtrl($scope, $uibModal,
         $scope.yamlDownloadHref = window.URL.createObjectURL(yamlBlob);
         $scope.yamlDownloadUrl = [
           MIME_TYPE,
-          'swagger.yaml',
+          'bosh-editor.yaml',
           $scope.yamlDownloadHref
         ].join(':');
       };
