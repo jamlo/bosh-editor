@@ -27,10 +27,17 @@ SwaggerEditor.service('Autocomplete', function($rootScope, snippets,
         // These function might shift or push to paths, therefore we're passing
         // a clone of path to them
 
-        if (isNumber(_.last(path))) {
-          path.pop();
-          path.push(0);
-        }
+        var filteredPath = [];
+
+        path.forEach(function(pathItem) {
+          if (isNumber(pathItem)) {
+            filteredPath.push("0");
+          } else {
+            filteredPath.push(pathItem);
+          }
+        });
+
+        path = filteredPath;
 
         var keywordsForPos = getKeywordsForPosition(_.clone(path));
         var snippetsForPos = getSnippetsForPosition(_.clone(path), Preferences.get("autoCompleteMode"));
