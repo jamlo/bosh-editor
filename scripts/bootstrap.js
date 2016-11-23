@@ -37,9 +37,6 @@ $(function() {
       $templateCache.put('templates/about.html',
         require('templates/about.html'));
 
-      $templateCache.put('templates/code-gen-error-modal.html',
-        require('templates/code-gen-error-modal.html'));
-
       $templateCache.put('templates/error-presenter.html',
         require('templates/error-presenter.html'));
 
@@ -54,12 +51,6 @@ $(function() {
 
       $templateCache.put('templates/open-examples.html',
         require('templates/open-examples.html'));
-
-      $templateCache.put('templates/operation.html',
-        require('templates/operation.html'));
-
-      $templateCache.put('templates/paste-json.html',
-        require('templates/paste-json.html'));
 
       $templateCache.put('templates/path.html',
         require('templates/path.html'));
@@ -85,29 +76,14 @@ $(function() {
       $templateCache.put('templates/schema-model.html',
         require('templates/schema-model.html'));
 
-      $templateCache.put('templates/security.html',
-        require('templates/security.html'));
-
       $templateCache.put('templates/specs-info.html',
         require('templates/specs-info.html'));
 
       $templateCache.put('templates/tags.html',
         require('templates/tags.html'));
 
-      $templateCache.put('templates/try-operation.html',
-        require('templates/try-operation.html'));
-
       $templateCache.put('templates/url-import.html',
         require('templates/url-import.html'));
-
-      $templateCache.put('templates/auth/api-key.html',
-        require('templates/auth/api-key.html'));
-
-      $templateCache.put('templates/auth/basic.html',
-        require('templates/auth/basic.html'));
-
-      $templateCache.put('templates/auth/oauth2.html',
-        require('templates/auth/oauth2.html'));
     });
 
     angular.bootstrap(window.document, ['SwaggerEditor']);

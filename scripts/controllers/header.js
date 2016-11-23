@@ -1,8 +1,7 @@
 'use strict';
 
 SwaggerEditor.controller('HeaderCtrl', function HeaderCtrl($scope, $uibModal,
-  $stateParams, $state, $rootScope, Storage, Builder, FileLoader, Editor,
-  Codegen, Preferences, YAML, defaults, strings, $localStorage) {
+  $stateParams, $state, $rootScope, Storage, Builder, FileLoader, Editor, Preferences, YAML, defaults, strings, $localStorage) {
   if ($stateParams.path) {
     $scope.breadcrumbs = [{active: true, name: $stateParams.path}];
   } else {
@@ -35,47 +34,6 @@ SwaggerEditor.controller('HeaderCtrl', function HeaderCtrl($scope, $uibModal,
     showIntro: !defaults.disableNewUserIntro
   });
   $rootScope.showAbout = $localStorage.showIntro;
-
-  // -- Client and Server menus
-  $scope.disableCodeGen = defaults.disableCodeGen;
-
-  if (!defaults.disableCodeGen) {
-    Codegen.getServers().then(function(servers) {
-      $scope.servers = servers;
-    }, function() {
-      $scope.serversNotAvailable = true;
-    });
-
-    Codegen.getClients().then(function(clients) {
-      $scope.clients = clients;
-    }, function() {
-      $scope.clientsNotAvailable = true;
-    });
-  }
-
-  $scope.getSDK = function(type, language) {
-    Codegen.getSDK(type, language).then(noop, showCodegenError);
-  };
-
-  /**
-   * @param {object} resp - response
-  */
-  function showCodegenError(resp) {
-    $uibModal.open({
-      template: require('templates/code-gen-error-modal.html'),
-      controller: 'GeneralModal',
-      size: 'large',
-      resolve: {
-        data: function() {
-          if (resp.data) {
-            return resp.data;
-          }
-
-          return resp.config;
-        }
-      }
-    });
-  }
 
   $scope.showFileMenu = function() {
     return !defaults.disableFileMenu;
@@ -110,14 +68,6 @@ SwaggerEditor.controller('HeaderCtrl', function HeaderCtrl($scope, $uibModal,
     $uibModal.open({
       template: require('templates/url-import.html'),
       controller: 'UrlImportCtrl',
-      size: 'large'
-    });
-  };
-
-  $scope.openPasteJSON = function() {
-    $uibModal.open({
-      template: require('templates/paste-json.html'),
-      controller: 'PasteJSONCtrl',
       size: 'large'
     });
   };

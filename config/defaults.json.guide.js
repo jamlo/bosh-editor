@@ -23,33 +23,6 @@ var defaults = {
   },
 
   /*
-   * Code generator endpoints s are used for generating servers and client
-   * Swagger Editor will GET list of server and client generators and POST to
-   * each `server` and `client` with Swagger document in body to download the
-   * product of the code generator.
-  */
-  codegen: {
-    /*
-     * Menu items are generated based on result of GET request to these
-     * endpoint
-    */
-    servers: '//generator.swagger.io/online/api/gen/servers',
-    clients: '//generator.swagger.io/online/api/gen/clients',
-
-    /*
-     * For each item in menu item, Swagger Editor will make calls to these
-     * endpoint to download the generated code accordingly
-    */
-    server: '//generator.swagger.io/online/api/gen/servers/{language}',
-    client: '//generator.swagger.io/online/api/gen/clients/{language}'
-  },
-
-  /*
-   *  Disables Code Generators
-  */
-  disableCodeGen: true,
-
-  /*
    * Folder that example files are located
    * Note that this string will be used in between two other url segments
    * so you always need the trailing and leading slashes
@@ -83,11 +56,6 @@ var defaults = {
   autocompleteExtension: {},
 
   /*
-   * Use a back-end for storing the document instead of browser local storage
-  */
-  useBackendForStorage: false,
-
-  /*
    * Change the default auto-complete mode
    */
   autoCompleteMode: 'deployment-manifest',
@@ -97,23 +65,6 @@ var defaults = {
    * respond to change.
   */
   keyPressDebounceTime: 200,
-
-  /*
-   * The timeout for throttling backend calls
-  */
-  backendThrottle: 200,
-
-  /*
-   * URL of the Back-end for storing swagger document. Editor will PUT and GET
-   * to this URL to **Save** and **Read** the Swagger document
-  */
-  backendEndpoint: '/editor/spec',
-
-  /*
-   * When using a back-end, editor by default PUTs JSON document for Saving.
-   * Enable this to use YAML instead
-  */
-  useYamlBackend: false,
 
   /*
    * Disables File menu which includes New, Open Example and Import commands

@@ -1,16 +1,9 @@
 {
-  "codegen": {
-    "servers": "//generator.swagger.io/api/gen/servers",
-    "clients": "//generator.swagger.io/api/gen/clients",
-    "server": "//generator.swagger.io/api/gen/servers/{language}",
-    "client": "//generator.swagger.io/api/gen/clients/{language}"
-  },
   "analytics": {
     "google": {
       "id": "helloooooooo"
     }
   },
-  "disableCodeGen": true,
   "examplesFolder": "spec-files/",
   "editorOptions": {
     "theme": "ace/theme/atom_dark"
@@ -25,11 +18,7 @@
     "runtime-config"
   ],
   "autocompleteExtension": {},
-  "useBackendForStorage": false,
-  "backendThrottle": 200,
   "keyPressDebounceTime": 200,
-  "backendEndpoint": "/editor/spec",
-  "useYamlBackend": false,
   "disableFileMenu": false,
   "headerBranding": false,
   "disableNewUserIntro": false,

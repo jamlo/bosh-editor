@@ -5,16 +5,11 @@ var SparkMD5 = require('spark-md5');
 var angular = require('angular');
 
 SwaggerEditor.controller('PreviewCtrl', function PreviewCtrl(Storage, Builder,
-  ASTManager, Editor, FocusedPath, TagManager, Preferences, FoldStateManager,
+  ASTManager, Editor, FocusedPath, Preferences, FoldStateManager,
   $scope, $rootScope, $stateParams, $sessionStorage) {
   $scope.loadLatest = loadLatest;
-  $scope.tagIndexFor = TagManager.tagIndexFor;
-  $scope.getAllTags = TagManager.getAllTags;
-  $scope.tagsHaveDescription = TagManager.tagsHaveDescription;
-  $scope.getCurrentTags = TagManager.getCurrentTags;
   $scope.stateParams = $stateParams;
   $scope.isVendorExtension = isVendorExtension;
-  $scope.showOperation = showOperation;
   $scope.showDefinitions = showDefinitions;
   $scope.responseCodeClassFor = responseCodeClassFor;
   $scope.focusEdit = focusEdit;
@@ -188,43 +183,13 @@ SwaggerEditor.controller('PreviewCtrl', function PreviewCtrl(Storage, Builder,
   }
 
   /**
-   * Determines if an operation should be shown or not
-   * @param  {object} operation     the operation object
-   * @param  {string} operationName the operation name in path hash
-   * @return {boolean}              true if the operation should be shown
-   */
-  function showOperation(operation, operationName) {
-    var currentTagsLength = TagManager.getCurrentTags() &&
-      TagManager.getCurrentTags().length;
-
-    if (isVendorExtension(operationName)) {
-      return false;
-    }
-
-    if (operationName === 'parameters') {
-      return false;
-    }
-
-    if (!currentTagsLength) {
-      return true;
-    }
-
-    return operation.tags && operation.tags.length &&
-      _.intersection(TagManager.getCurrentTags(), operation.tags).length;
-  }
-
-  /**
    * Determines if apath should be shown or not
    * @param  {object} path     the path object
    * @param  {string} pathName the path name in paths hash
    * @return {boolean}         true if the path should be shown
    */
   function showPath(path, pathName) {
-    if (isVendorExtension(pathName)) {
-      return false;
-    }
-
-    return _.some(path, showOperation);
+    return true;
   }
 
   /**
