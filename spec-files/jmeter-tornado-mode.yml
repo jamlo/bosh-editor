@@ -1,30 +1,33 @@
-name: jmeter-tornado-mode-deployment
+name: jmeter-tornado-deployment
+
+director_uuid: REPLACE_ME
 
 releases:
 - name: jmeter-tornado
   version: latest
 
 stemcells:
-- alias: default_stemcell
+- alias: trusty
   os: ubuntu-trusty
   version: latest
-
-update:
-  canaries: 5
-  max_in_flight: 5
-  canary_watch_time: 30000-600000
-  update_watch_time: 5000-600000
 
 instance_groups:
 - name: jmeter_attackers
   instances: 3
-  vm_type: default
-  stemcell: default_stemcell
+  vm_type: REPLACE_ME
+  stemcell: trusty
   azs: [z1]
   networks:
-  - name: default
+  - name: REPLACE_ME
   jobs:
   - name: jmeter_tornado
     properties:
       test_plan_xml: |
         {Your jmter JMX test plan goes here}
+
+update:
+  canaries: 5
+  max_in_flight: 5
+  serial: false
+  canary_watch_time: 1000-60000
+  update_watch_time: 1000-60000

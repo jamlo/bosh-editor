@@ -63,10 +63,6 @@ SwaggerEditor.controller('PreviewCtrl', function PreviewCtrl(Storage, Builder,
 
     $rootScope.$apply(function() {
       if (result.specs) {
-        // Retrive and put back fold state
-        _.defaultsDeep(result.specs,
-          FoldStateManager.getFoldedTree($rootScope.specs, result.specs));
-
         $rootScope.specs = result.specs;
       }
       $rootScope.errors = result.errors || [];
@@ -180,6 +176,14 @@ SwaggerEditor.controller('PreviewCtrl', function PreviewCtrl(Storage, Builder,
   */
   function showDefinitions(definitions) {
     return angular.isObject(definitions);
+  }
+
+  function lifecycleColor(lifeCycle) {
+    if (lifeCycle === "errand") {
+      return "0";
+    } else {
+      return "3";
+    }
   }
 
   /**

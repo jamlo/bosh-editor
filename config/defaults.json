@@ -9,8 +9,9 @@
     "theme": "ace/theme/atom_dark"
   },
   "exampleFiles": [
-    "jmeter-storm-mode.yaml",
-    "jmeter-tornado-mode.yaml"
+    "jmeter-storm-mode.yml",
+    "jmeter-tornado-mode.yml",
+    "concourse.yml"
   ],
   "autoCompleteMode" : "deployment-manifest",
   "autoCompleteModes": [
@@ -24,6 +25,6 @@
   "disableNewUserIntro": false,
   "enableTryIt": true,
   "brandingCssClass": "",
-  "importProxyUrl": "https://cors-it.herokuapp.com/?url=",
+  "importProxyUrl": "https://example.com/",
   "pointerResolutionBasePath": null
 }

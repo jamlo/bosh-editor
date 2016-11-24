@@ -27,29 +27,61 @@
       </div>
     </header>
 
+    <section class="description" ng-if="operation.description">
+      <h4>Description</h4>
+      <div marked="operation.description"></div>
+    </section>
+
     <div
       class='content'
       collapse-when="instanceGroup.$folded"
       ng-if="instanceGroup.name">
+      <div class="tags">
+        <span
+          class="tag"
+          ng-class="{'tag-color-0': instanceGroup.lifecycle==='errand', 'tag-color-2': instanceGroup.lifecycle!=='errand'}">
+          {{instanceGroup.lifecycle || "service"}}
+        </span>
+      </div>
+
       <section class="parameters">
+        <h4>Info</h4>
+        <div>
+          <table class="params">
+            <thead>
+            <tr>
+              <th>Instances</th>
+              <th>VM Type</th>
+              <th>Stemcell</th>
+              <th>AZs</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td>{{instanceGroup.instances}}</td>
+              <td>{{instanceGroup.vm_type}}</td>
+              <td>{{instanceGroup.stemcell}}</td>
+              <td><b ng-repeat="az in instanceGroup.azs">{{az}}{{$last ? '' : ', '}}</b></td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="parameters" ng-if="instanceGroup.jobs && instanceGroup.jobs.length > 0">
+        <h4>Jobs</h4>
         <div>
           <table class="params">
             <thead>
             <tr>
               <th>Name</th>
-              <th>Instances</th>
-              <th>Lifecycle</th>
-              <th>VM Type</th>
-              <th>Stemcell</th>
+              <th>Release</th>
             </tr>
             </thead>
             <tbody>
-            <tr>
-              <td>{{instanceGroup.name}}</td>
-              <td>{{instanceGroup.instances}}</td>
-              <td>{{instanceGroup.lifecycle}}</td>
-              <td>{{instanceGroup.vm_type}}</td>
-              <td>{{instanceGroup.stemcell}}</td>
+            <tr ng-repeat="job in instanceGroup.jobs">
+              <td>{{job.name}}</td>
+              <td>{{job.release}}</td>
             </tr>
             </tbody>
           </table>

@@ -44,7 +44,7 @@ SwaggerEditor.controller('HeaderCtrl', function HeaderCtrl($scope, $uibModal,
   };
 
   $scope.newProject = function() {
-    FileLoader.loadFromUrl('spec-files/guide.yaml').then(function(value) {
+    FileLoader.loadFromUrl('spec-files/guide.yml').then(function(value) {
       $rootScope.editorValue = value;
       Storage.save('yaml', value);
       $state.go('home', {tags: null});
