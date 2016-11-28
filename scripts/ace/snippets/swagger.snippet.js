@@ -3,12 +3,11 @@
 var _ = require('lodash');
 
 SwaggerEditor.config(function($provide) {
+  // ================================================================================
+  // ================================================================================
+  // Deployment Manifest Snippets
 
-  /**
-   * ================================================================================
-   * ================================================================================
-   * Deployment Manifest Snippets
-   */
+  /* eslint-disable */
   function makeReleasesSnippet() {
     return [
       'releases:',
@@ -189,11 +188,10 @@ SwaggerEditor.config(function($provide) {
     return deploymentManifestSnippets;
   }
 
-  /**
-   * ================================================================================
-   * ================================================================================
-   * Runtime Config Snippets
-   */
+  // ================================================================================
+  // ================================================================================
+  // Runtime Config Snippets
+
   function rcMakeReleasesSnippet() {
     return [
       'releases:',
@@ -287,8 +285,9 @@ SwaggerEditor.config(function($provide) {
 
     return cloudConfigSnippets;
   }
+  /* eslint-enable */
 
-  var allSnippets =_.concat(
+  var allSnippets = _.concat(
     generateDeploymentManifestSnippets(),
     generateCloudConfigSnippets()
   );

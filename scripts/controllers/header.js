@@ -1,7 +1,8 @@
 'use strict';
 
 SwaggerEditor.controller('HeaderCtrl', function HeaderCtrl($scope, $uibModal,
-  $stateParams, $state, $rootScope, Storage, Builder, FileLoader, Editor, Preferences, YAML, defaults, strings, $localStorage) {
+  $stateParams, $state, $rootScope, Storage, Builder, FileLoader,
+  Editor, Preferences, YAML, defaults, strings, $localStorage) {
   if ($stateParams.path) {
     $scope.breadcrumbs = [{active: true, name: $stateParams.path}];
   } else {
@@ -216,9 +217,4 @@ SwaggerEditor.controller('HeaderCtrl', function HeaderCtrl($scope, $uibModal,
       return word[0].toUpperCase() + word.substr(1);
     }).join(' ');
   };
-
-  /** */
-  function noop() {
-
-  }
 });

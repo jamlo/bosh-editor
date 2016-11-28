@@ -178,14 +178,6 @@ SwaggerEditor.controller('PreviewCtrl', function PreviewCtrl(Storage, Builder,
     return angular.isObject(definitions);
   }
 
-  function lifecycleColor(lifeCycle) {
-    if (lifeCycle === "errand") {
-      return "0";
-    } else {
-      return "3";
-    }
-  }
-
   /**
    * Determines if apath should be shown or not
    * @param  {object} path     the path object

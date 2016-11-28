@@ -30,9 +30,9 @@ var config = {
     new ExtractTextPlugin('styles.css')
   ],
 
-  // eslint: {
-  //   configFile: './.eslintrc.js'
-  // },
+  eslint: {
+    configFile: './.eslintrc.js'
+  },
 
   module: {
     loaders: [
@@ -70,14 +70,14 @@ var config = {
         test: /\.html$/,
         loader: 'html'
       }
-    ]
+    ],
 
-    // preLoaders: [
-    //   {
-    //     test: /\.js$/,
-    //     loader: 'eslint'
-    //   }
-    // ]
+    preLoaders: [
+      {
+        test: /\.js$/,
+        loader: 'eslint'
+      }
+    ]
   }
 };
 

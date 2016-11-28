@@ -2,9 +2,8 @@
 
 var _ = require('lodash');
 var angular = require('angular');
-
 SwaggerEditor.service('KeywordMap', function KeywordMap(Preferences, defaults) {
-
+  /* eslint-disable */
   /**
    * ========================================================================================
    * ========================================================================================
@@ -94,8 +93,7 @@ SwaggerEditor.service('KeywordMap', function KeywordMap(Preferences, defaults) {
     tags: Object
   };
 
-  // jscs:enable
-
+  /* eslint-enable */
   this.get = function() {
     var choosenMode = Preferences.get("autoCompleteMode");
     var choosenMap = [];

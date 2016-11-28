@@ -1,7 +1,5 @@
 'use strict';
 
-var _ = require('lodash');
-
 SwaggerEditor.controller('ChooseModeCtrl', function ChooseModeCtrl($scope,
   $uibModalInstance, $rootScope, $state, Analytics, Preferences, defaults) {
   $scope.modes = defaults.autoCompleteModes;

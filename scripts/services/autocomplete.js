@@ -40,7 +40,10 @@ SwaggerEditor.service('Autocomplete', function($rootScope, snippets,
         path = filteredPath;
 
         var keywordsForPos = getKeywordsForPosition(_.clone(path));
-        var snippetsForPos = getSnippetsForPosition(_.clone(path), Preferences.get("autoCompleteMode"));
+        var snippetsForPos = getSnippetsForPosition(
+          _.clone(path),
+          Preferences.get("autoCompleteMode")
+        );
 
         if (_.last(path) === '$ref') {
           return get$refs().then(function($refs) {
@@ -88,15 +91,15 @@ SwaggerEditor.service('Autocomplete', function($rootScope, snippets,
     };
   };
 
-  /*
+  /**
    * Check if the parameter is a number
    *
-   * @param {object}
+   * @param {object} item to check
    *
    * @return {Boolean} - True if a number, else false
   */
-  function isNumber(n) {
-    return !isNaN(parseFloat(n)) && isFinite(n);
+  function isNumber(item) {
+    return !isNaN(parseFloat(item)) && isFinite(item);
   }
 
   /**
@@ -287,7 +290,9 @@ SwaggerEditor.service('Autocomplete', function($rootScope, snippets,
     // sort them based on their position. Sorting is done by assigning a score
     // to each snippet, not by sorting the array
     return snippets
-      .filter(function (snippet) { return snippet.mode === autoCompleteMode })
+      .filter(function(snippet) {
+        return snippet.mode === autoCompleteMode;
+      })
       .filter(filterForSnippets(path))
       .map(constructAceSnippet)
       .map(snippetSorterForPos(path));
