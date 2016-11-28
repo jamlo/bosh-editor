@@ -182,7 +182,7 @@ SwaggerEditor.config(function($provide) {
     ];
 
     deploymentManifestSnippets.forEach(function(element) {
-      element.mode = "deployment-manifest";
+      element.mode = "Deployment-Manifest";
     });
 
     return deploymentManifestSnippets;
@@ -280,7 +280,7 @@ SwaggerEditor.config(function($provide) {
     ];
 
     cloudConfigSnippets.forEach(function(element) {
-      element.mode = "runtime-config";
+      element.mode = "Runtime-Config";
     });
 
     return cloudConfigSnippets;

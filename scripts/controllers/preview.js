@@ -17,7 +17,6 @@ SwaggerEditor.controller('PreviewCtrl', function PreviewCtrl(Storage, Builder,
   $scope.foldEditor = FoldStateManager.foldEditor;
   $scope.listAllOperation = listAllOperation;
   $scope.listAllDefnitions = listAllDefnitions;
-  $scope.autocompleteMode = Preferences.get('autoCompleteMode');
 
   Storage.addChangeListener('yaml', update);
   Preferences.onChange(function() {
@@ -37,8 +36,6 @@ SwaggerEditor.controller('PreviewCtrl', function PreviewCtrl(Storage, Builder,
       $rootScope.progressStatus = 'progress-unsaved';
       return;
     }
-
-    $scope.autocompleteMode = Preferences.get('autoCompleteMode');
 
     // Error can come in success callback, because of recursive promises
     // So we install same handler for error and success

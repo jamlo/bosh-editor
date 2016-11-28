@@ -58,7 +58,7 @@ var defaults = {
   /*
    * Change the default auto-complete mode
    */
-  autoCompleteMode: 'deployment-manifest',
+  autoCompleteMode: 'Deployment-Manifest',
 
   /*
    * Change how many milliseconds after the last keypress the editor should

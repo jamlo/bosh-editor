@@ -99,10 +99,10 @@ SwaggerEditor.service('KeywordMap', function KeywordMap(Preferences, defaults) {
     var choosenMap = [];
 
     switch (choosenMode) {
-      case "deployment-manifest":
+      case "Deployment-Manifest":
         choosenMap = deploymentManifestMap;
         break;
-      case "runtime-config":
+      case "Runtime-Config":
         choosenMap = runtimeConfigMap;
         break;
       default:

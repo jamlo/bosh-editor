@@ -115,6 +115,10 @@
   </section>
 
   <section class="status-bar">
+    <span class="label label-danger">{{autocompleteMode}} Mode</span>
+  </section>
+
+  <section class="status-bar">
     <div class="status {{statusClass}}" ng-if="status">
       <i ng-if="statusClass == 'working'" class="fa fa-spinner fa-pulse"></i>
       <i ng-if="statusClass == 'error'" class="fa fa fa-times"></i>

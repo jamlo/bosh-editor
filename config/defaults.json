@@ -13,10 +13,10 @@
     "jmeter-tornado-mode.yml",
     "concourse.yml"
   ],
-  "autoCompleteMode" : "deployment-manifest",
+  "autoCompleteMode" : "Deployment-Manifest",
   "autoCompleteModes": [
-    "deployment-manifest",
-    "runtime-config"
+    "Deployment-Manifest",
+    "Runtime-Config"
   ],
   "autocompleteExtension": {},
   "keyPressDebounceTime": 200,

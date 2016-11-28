@@ -3,6 +3,12 @@
 SwaggerEditor.controller('HeaderCtrl', function HeaderCtrl($scope, $uibModal,
   $stateParams, $state, $rootScope, Storage, Builder, FileLoader,
   Editor, Preferences, YAML, defaults, strings, $localStorage) {
+  $scope.autocompleteMode = Preferences.get('autoCompleteMode');
+
+  Preferences.onChange(function() {
+    renderMode(Preferences.get('autoCompleteMode'));
+  });
+
   if ($stateParams.path) {
     $scope.breadcrumbs = [{active: true, name: $stateParams.path}];
   } else {
@@ -124,6 +130,14 @@ SwaggerEditor.controller('HeaderCtrl', function HeaderCtrl($scope, $uibModal,
     return Boolean(Preferences).get('liveRender');
   };
 
+  /**
+   * Render Chosen Mode
+   * @param {String} mode to be rendered
+   */
+  function renderMode(mode) {
+    $scope.autocompleteMode = mode;
+  }
+
   /** */
   function assignDownloadHrefs() {
     var MIME_TYPE = 'text/plain';
@@ -144,18 +158,6 @@ SwaggerEditor.controller('HeaderCtrl', function HeaderCtrl($scope, $uibModal,
       }
 
       var assign = function(yaml, json) {
-        // // swagger and version should be a string to comfort with the schema
-        // if (json.info.version) {
-        //   json.info.version = String(json.info.version);
-        // }
-        // if (json.swagger) {
-        //   if (json.swagger === 2) {
-        //     json.swagger = '2.0';
-        //   } else {
-        //     json.swagger = String(json.swagger);
-        //   }
-        // }
-
         json = JSON.stringify(json, null, 4);
         var jsonBlob = new Blob([json], {type: MIME_TYPE});
         $scope.jsonDownloadHref = window.URL.createObjectURL(jsonBlob);
