@@ -17,6 +17,7 @@ SwaggerEditor.controller('PreviewCtrl', function PreviewCtrl(Storage, Builder,
   $scope.foldEditor = FoldStateManager.foldEditor;
   $scope.listAllOperation = listAllOperation;
   $scope.listAllDefnitions = listAllDefnitions;
+  $scope.isCurrentMode = isCurrentMode;
 
   Storage.addChangeListener('yaml', update);
   Preferences.onChange(function() {
@@ -117,6 +118,15 @@ SwaggerEditor.controller('PreviewCtrl', function PreviewCtrl(Storage, Builder,
   function loadLatest() {
     update($rootScope.editorValue, true);
     $rootScope.isDirty = false;
+  }
+
+  /**
+   * @param {String} mode input mode to check for
+   * @return {boolean} if mode passed ins current mode
+   */
+  function isCurrentMode(mode) {
+    var currentMode = Preferences.get('autoCompleteMode');
+    return currentMode.toUpperCase() === mode.toUpperCase();
   }
 
   /**
