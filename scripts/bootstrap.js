@@ -79,8 +79,8 @@ $(function() {
       $templateCache.put('templates/specs-info.html',
         require('templates/specs-info.html'));
 
-      $templateCache.put('templates/tags.html',
-        require('templates/tags.html'));
+      $templateCache.put('templates/addons-tags.html',
+        require('templates/addons-tags.html'));
 
       $templateCache.put('templates/url-import.html',
         require('templates/url-import.html'));

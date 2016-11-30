@@ -11,26 +11,37 @@
 
   <ng-include
     src="'templates/specs-info.html'"
-    ng-if="isCurrentMode('Deployment-manifest')">
+    ng-if="isCurrentMode('Deployment-Manifest')">
   </ng-include>
 
   <ng-include
     src="'templates/releases.html'"
-    ng-if="isCurrentMode('Deployment-manifest')">
+    ng-if="isCurrentMode('Deployment-Manifest') || isCurrentMode('Runtime-Config')">
   </ng-include>
 
   <ng-include
     src="'templates/stemcells.html'"
-    ng-if="isCurrentMode('Deployment-manifest')">
+    ng-if="isCurrentMode('Deployment-Manifest')">
   </ng-include>
 
   <ng-include
     src="'templates/instance-groups.html'"
-    ng-if="isCurrentMode('Deployment-manifest')">
+    ng-if="isCurrentMode('Deployment-Manifest')">
   </ng-include>
 
   <ng-include
     src="'templates/update-block.html'"
-    ng-if="isCurrentMode('Deployment-manifest')">
+    ng-if="isCurrentMode('Deployment-Manifest')">
+  </ng-include>
+
+  <!-- ================================================== -->
+  <ng-include
+    src="'templates/addons.html'"
+    ng-if="isCurrentMode('Runtime-Config')">
+  </ng-include>
+
+  <ng-include
+    src="'templates/addons-tags.html'"
+    ng-if="isCurrentMode('Runtime-Config')">
   </ng-include>
 </div>

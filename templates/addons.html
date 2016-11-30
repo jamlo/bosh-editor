@@ -1,0 +1,83 @@
+<!--==================================================================-->
+<!--Instance Groups-->
+<header ng-if="specs.addons.length > 0">
+  <h3 class="section-header">
+    <a ng-click="specs.addons.$folded = !specs.addons.$folded;">
+
+      <span><strong>Addons ({{specs.addons.length}})</strong></span>
+    </a>
+  </h3>
+</header>
+
+<ul
+  class="operations"
+  collapse-when="specs.addons.$folded"
+  ng-if="specs.addons.length > 0">
+  <li
+    class="get operation"
+    ng-repeat="addon in specs.addons">
+
+    <header
+      ng-click="addon.$folded = !addon.$folded;"
+      ng-if="addon.name"
+    >
+      <div
+        class='http-method'
+        class="toggleOperation">{{addon.name}}
+      </div>
+    </header>
+
+    <section class="description" ng-if="operation.description">
+      <h4>Description</h4>
+      <div marked="operation.description"></div>
+    </section>
+
+    <div
+      class='content'
+      collapse-when="addon.$folded"
+      ng-if="addon.name">
+
+      <section class="parameters" ng-if="addon.include">
+        <h4>Include:</h4>
+        <div>
+          <table class="params">
+            <thead>
+            <tr>
+              <th>Deployments</th>
+              <th>Jobs</th>
+              <th>Stemcell(OS)</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td><span ng-repeat="d in addon.include.deployments track by $index">{{d}}{{$last ? '' : ', '}}</span></td>
+              <td><span ng-repeat="j in addon.include.jobs track by $index">{{j.name}}{{$last ? '' : ', '}}</span></td>
+              <td><span ng-if="addon.include.stemcell">{{addon.include.stemcell.os}}</span></td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="parameters" ng-if="addon.jobs && addon.jobs.length > 0">
+        <h4>Jobs</h4>
+        <div>
+          <table class="params">
+            <thead>
+            <tr>
+              <th>Name</th>
+              <th>Release</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="job in addon.jobs">
+              <td>{{job.name}}</td>
+              <td>{{job.release}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </li>
+</ul>
