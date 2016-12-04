@@ -19,9 +19,6 @@
         <li>
           <a dropdown-toggle ng-click="newProject()" tabindex="-1" track-event="file new"><i class="fa fa-file-text"></i>&nbsp;<span>New</span></a>
         </li>
-        <li>
-          <a dropdown-toggle id="open-example" ng-click="openExamples()" tabindex="-1" track-event="file open-example"><i class="fa fa-folder-open highlighted"></i>&nbsp;<span>Open Example&hellip;</span></a>
-        </li>
         <li class="divider"></li>
         <li>
           <a dropdown-toggle ng-click="openImportFile()" tabindex="-1" track-event="file import file"><i class="fa fa-file highlighted"></i>&nbsp;<span>Import File&hellip;</span></a>
@@ -70,6 +67,12 @@
           </a>
         </li>
       </ul>
+    </div>
+
+    <div class="mode dropdown" uib-dropdown>
+      <button class="dropdown-icon btn btn-default" id="open-example" ng-click="openExamples()" track-event="file open-example" uib-dropdown-toggle>
+        <span>Sample Manifests</span>
+      </button>
     </div>
 
     <div class="mode dropdown" uib-dropdown>
