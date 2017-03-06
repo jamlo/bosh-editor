@@ -19,14 +19,8 @@
     ng-if="isCurrentMode('Deployment-Manifest')">
   </ng-include>
 
-
   <ng-include
     src="'templates/variables.html'"
-    ng-if="isCurrentMode('Deployment-Manifest')">
-  </ng-include>
-
-  <ng-include
-    src="'templates/update-block.html'"
     ng-if="isCurrentMode('Deployment-Manifest')">
   </ng-include>
 
@@ -37,6 +31,11 @@
 
   <ng-include
     src="'templates/stemcells.html'"
+    ng-if="isCurrentMode('Deployment-Manifest')">
+  </ng-include>
+
+  <ng-include
+    src="'templates/update-block.html'"
     ng-if="isCurrentMode('Deployment-Manifest')">
   </ng-include>
 

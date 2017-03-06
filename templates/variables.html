@@ -2,7 +2,7 @@
 <!--Variables-->
 <header ng-if="specs.variables.length > 0">
   <h3 class="section-header">
-    <a ng-click="specs.variables.$folded = !specs.variables.$folded; collapseVariables(specs.variables.$folded)">
+    <a ng-click="specs.variables.$folded = !specs.variables.$folded;">
       <span><strong>Variables ({{specs.variables.length}})</strong></span>
     </a>
     <span class="on-hover">
@@ -44,8 +44,13 @@
         </span>
       </div>
 
+      <section class="summary" ng-if="variable.options">
+        <h4>Options</h4>
+        <pre id="json">{{variable.prettyOptions}}</pre>
+      </section>
+
       <section class="parameters" ng-if="variable.usages && variable.usages.length > 0">
-        <h4>Usage: {{variable.usages.length}} times</h4>
+        <h4>Used: {{variable.usages.length}} times</h4>
         <div>
           <table class="params">
             </thead>
