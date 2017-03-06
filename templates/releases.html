@@ -2,7 +2,7 @@
 <!--Releases-->
 <header ng-if="specs.releases.length > 0">
   <h3 class="section-header">
-    <a ng-click="specs.releases.$folded = !specs.releases.$folded;">
+    <a ng-click="specs.releases.$folded = !specs.releases.$folded; collapseReleases(specs.releases.$folded)">
 
       <span><strong>Releases ({{specs.releases.length}})</strong></span>
     </a>

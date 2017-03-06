@@ -17,6 +17,9 @@ SwaggerEditor.controller('PreviewCtrl', function PreviewCtrl(Storage, Builder,
   $scope.foldEditor = FoldStateManager.foldEditor;
   $scope.listAllOperation = listAllOperation;
   $scope.listAllDefnitions = listAllDefnitions;
+  $scope.listAllInstanceGroups = listAllInstanceGroups;
+  $scope.collapseReleases = collapseReleases;
+  $scope.listAllVariables = listAllVariables;
   $scope.isCurrentMode = isCurrentMode;
 
   Storage.addChangeListener('yaml', update);
@@ -61,6 +64,17 @@ SwaggerEditor.controller('PreviewCtrl', function PreviewCtrl(Storage, Builder,
 
     $rootScope.$apply(function() {
       if (result.specs) {
+        // Retrive and put back fold state
+        _.defaultsDeep(result.specs, FoldStateManager.getFoldedTree($rootScope.specs, result.specs));
+
+        console.time('extractVariables');
+
+        var variablesUsages = extractVariables(result.specs);
+        injectVariablesUsageInSpec(result.specs.variables, variablesUsages);
+
+        console.timeEnd('extractVariables');
+
+
         $rootScope.specs = result.specs;
       }
       $rootScope.errors = result.errors || [];
@@ -233,5 +247,114 @@ SwaggerEditor.controller('PreviewCtrl', function PreviewCtrl(Storage, Builder,
         FoldStateManager.foldEditor(['definitions', definitionName], true);
       }
     });
-  }
+  };
+
+    /**
+     * Folds all instance groups regardless of their current fold status
+     *
+    */
+    function listAllInstanceGroups() {
+      _.each($scope.specs.instance_groups, function(instance_group, index) {
+        if (_.isObject(instance_group)) {
+          instance_group.$folded = true;
+//          FoldStateManager.foldEditor(['instance_groups', index], true);
+        }
+      });
+    };
+
+    /**
+     * Folds all variables regardless of their current fold status
+     *
+    */
+    function listAllVariables() {
+      _.each($scope.specs.variables, function(variable, index) {
+        if (_.isObject(variable)) {
+          variable.$folded = true;
+        }
+      });
+    };
+
+    /**
+     * Folds all releases regardless of their current fold status
+     *
+    */
+    function collapseReleases(desiredState) {
+      _.each($scope.specs.releases, function(release, index) {
+        if (_.isObject(release)) {
+//          FoldStateManager.foldEditor(['releases', index], desiredState);
+        }
+      });
+    };
+
+    /**
+     * Folds all variables regardless of their current fold status
+     *
+    */
+    function collapseVariables(desiredState) {
+      _.each($scope.specs.variables, function(variable, index) {
+        if (_.isObject(variable)) {
+//          FoldStateManager.foldEditor(['variables', index], desiredState);
+        }
+      });
+    };
+
+    function flattenObject(ob) {
+      var toReturn = {};
+
+      for (var i in ob) {
+        if (!ob.hasOwnProperty(i)) continue;
+
+        if ((typeof ob[i]) == 'object') {
+          var flatObject = flattenObject(ob[i]);
+          for (var x in flatObject) {
+            if (!flatObject.hasOwnProperty(x)) continue;
+
+            if( Object.prototype.toString.call( ob ) === '[object Array]' ) {
+                toReturn['name=' + ob[i]['name'] + '/' + x] = flatObject[x];
+                    } else {
+                        toReturn[i + '/' + x] = flatObject[x];
+                    }
+          }
+        } else {
+          toReturn[i] = ob[i];
+        }
+      }
+      return toReturn;
+    };
+
+    function extractVariables(spec) {
+      var flatObject = flattenObject(spec);
+      var result = {};
+      var regexp = /\(\(.*?\)\)/gi;
+
+      _.each( flatObject, function(item, path) {
+          if (item) {
+            var placeholderList = String(item).match(regexp);
+
+            var strippedPlaceholders = _.map(placeholderList, function(placeholder){
+               var strippedName = placeholder.replace(/^\(\(|\)\)$/g, '');
+               return strippedName.split(".", 1)[0];
+              }
+            );
+
+            for (const variableName of strippedPlaceholders) {
+              if (!(variableName in result)) {
+                result[variableName] = [path];
+              } else {
+                result[variableName].push(path);
+              }
+            }
+          }
+      });
+
+      return result;
+    };
+
+    function injectVariablesUsageInSpec(variablesSpec, variablesUsage) {
+      if (variablesSpec) {
+         _.forEach(variablesSpec, function(variableSpecItem) {
+            variableSpecItem['usages'] = variablesUsage[variableSpecItem['name']];
+          });
+      }
+    };
 });

@@ -1,0 +1,62 @@
+<!--==================================================================-->
+<!--Variables-->
+<header ng-if="specs.variables.length > 0">
+  <h3 class="section-header">
+    <a ng-click="specs.variables.$folded = !specs.variables.$folded; collapseVariables(specs.variables.$folded)">
+      <span><strong>Variables ({{specs.variables.length}})</strong></span>
+    </a>
+    <span class="on-hover">
+      <a ng-click="listAllVariables()">Collapse</a>
+    </span>
+  </h3>
+</header>
+
+<ul
+  class="operations"
+  collapse-when="specs.variables.$folded"
+  ng-if="specs.variables.length > 0">
+  <li
+    class="operation"
+    ng-repeat="variable in specs.variables"
+    ng-class="{password:'delete', certificate:'post', ssh:'get', rsa:'put'}[variable.type]">
+
+    <header
+      ng-click="variable.$folded = !variable.$folded;"
+      ng-if="variable.name">
+
+      <div
+        class='http-method'
+        class="toggleOperation">
+        {{variable.name}}
+        <span class="badge" style="font-size: 17px;">{{variable.usages.length}}</span>
+      </div>
+    </header>
+
+    <div
+      class='content'
+      collapse-when="variable.$folded"
+      ng-if="variable.name">
+      <div class="tags">
+        <span
+          class="tag"
+          ng-class="{'tag-color-0': variable.type==='errand', 'tag-color-2': variable.lifecycle!=='errand'}">
+          {{variable.type}}
+        </span>
+      </div>
+
+      <section class="parameters" ng-if="variable.usages && variable.usages.length > 0">
+        <h4>Usage: {{variable.usages.length}} times</h4>
+        <div>
+          <table class="params">
+            </thead>
+            <tbody>
+            <tr ng-repeat="item in variable.usages">
+              <td style="font-size: 14px;">{{item}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </li>
+</ul>

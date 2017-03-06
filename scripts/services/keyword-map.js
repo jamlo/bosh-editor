@@ -5,23 +5,23 @@ var angular = require('angular');
 SwaggerEditor.service('KeywordMap', function KeywordMap(Preferences, defaults) {
   /* eslint-disable */
   /**
-   * ========================================================================================
-   * ========================================================================================
+   * ===================================================================================================================
+   * ===================================================================================================================
    * Deployment Manifest Schema
    */
-  var release = {
+  var dm_release = {
     name: String,
     version: String
   };
 
-  var stemcell = {
+  var dm_stemcell = {
     alias: String,
     os: String,
     name: String,
     version: String
   };
 
-  var updateBlock = {
+  var dm_updateBlock = {
     canaries: String,
     max_in_flight: String,
     canary_watch_time: String,
@@ -29,7 +29,7 @@ SwaggerEditor.service('KeywordMap', function KeywordMap(Preferences, defaults) {
     serial: Boolean
   };
 
-  var job = {
+  var dm_job = {
     name: String,
     release: String,
     consumes: Object,
@@ -37,13 +37,13 @@ SwaggerEditor.service('KeywordMap', function KeywordMap(Preferences, defaults) {
     properties: Object
   };
 
-  var network = {
+  var dm_network = {
     name: String,
     static_ips: [String],
     "default": [String]
   };
 
-  var instance_group = {
+  var dm_instance_group = {
     name: String,
     instances: Number,
     lifecycle: String,
@@ -52,22 +52,22 @@ SwaggerEditor.service('KeywordMap', function KeywordMap(Preferences, defaults) {
     vm_extensions: [String],
     stemcell: String,
     migrated_from: String,
-    networks: [network],
-    jobs: [job]
+    networks: [dm_network],
+    jobs: [dm_job]
   };
 
   var deploymentManifestMap = {
     name: String,
     director_uuid: String,
-    releases: [release],
-    stemcells: [stemcell],
-    update: updateBlock,
-    instance_groups: [instance_group]
+    releases: [dm_release],
+    stemcells: [dm_stemcell],
+    update: dm_updateBlock,
+    instance_groups: [dm_instance_group]
   };
 
   /**
-   * ========================================================================================
-   * ========================================================================================
+   * ===================================================================================================================
+   * ===================================================================================================================
    * Runtime Config Schema
    */
   var rc_release = {
@@ -95,22 +95,22 @@ SwaggerEditor.service('KeywordMap', function KeywordMap(Preferences, defaults) {
 
   /* eslint-enable */
   this.get = function() {
-    var choosenMode = Preferences.get("autoCompleteMode");
-    var choosenMap = [];
+    var chosenMode = Preferences.get("autoCompleteMode");
+    var chosenMap = [];
 
-    switch (choosenMode) {
+    switch (chosenMode) {
       case "Deployment-Manifest":
-        choosenMap = deploymentManifestMap;
+        chosenMap = deploymentManifestMap;
         break;
       case "Runtime-Config":
-        choosenMap = runtimeConfigMap;
+        chosenMap = runtimeConfigMap;
         break;
       default:
-        console.log("Sorry, mode '" + choosenMode + "' is not supported.");
+        console.log("Sorry, mode '" + chosenMode + "' is not supported.");
     }
 
     var extension = angular.isObject(defaults.autocompleteExtension) ?
       defaults.autocompleteExtension : {};
-    return _.extend(choosenMap, extension);
+    return _.extend(chosenMap, extension);
   };
 });
