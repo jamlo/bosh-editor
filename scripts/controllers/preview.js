@@ -322,13 +322,13 @@ SwaggerEditor.controller('PreviewCtrl', function PreviewCtrl(Storage, Builder,
           return strippedName.split(".", 1)[0];
         });
 
-        for (const variableName of varsFound) {
+        _.each(varsFound, function(variableName) {
           if (variableName in result) {
             result[variableName].push(path);
           } else {
             result[variableName] = [path];
           }
-        }
+        });
       }
     });
 
