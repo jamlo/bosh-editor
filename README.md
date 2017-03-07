@@ -2,4 +2,4 @@
 
 This is a fork of swagger editor. It modifies it to adapt to [BOSH](https://bosh.io/) manifests.
 
-Still WIP - Check back later.
+Ongoing Work. Find a sample installation here : [http://bosh.jamilshamy.me/](http://bosh.jamilshamy.me/)
