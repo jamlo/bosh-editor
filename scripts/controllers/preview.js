@@ -63,12 +63,6 @@ SwaggerEditor.controller('PreviewCtrl', function PreviewCtrl(Storage, Builder,
 
     $rootScope.$apply(function() {
       if (result.specs) {
-        // Retrive and put back fold state
-        _.defaultsDeep(
-           result.specs,
-           FoldStateManager.getFoldedTree($rootScope.specs, result.specs)
-         );
-
         var variablesUsages = extractVariables(result.specs);
         injectVariablesUsageInSpec(result.specs.variables, variablesUsages);
         createPrettyOptions(result.specs.variables);

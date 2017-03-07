@@ -9,6 +9,7 @@
     "theme": "ace/theme/atom_dark"
   },
   "exampleFiles": [
+    "cf-deployment.yml",
     "jmeter-storm-mode.yml",
     "jmeter-tornado-mode.yml",
     "concourse.yml"
