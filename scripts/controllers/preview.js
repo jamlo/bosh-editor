@@ -248,8 +248,8 @@ SwaggerEditor.controller('PreviewCtrl', function PreviewCtrl(Storage, Builder,
   function listAllInstanceGroups() {
     _.each($scope.specs.instance_groups, function(instanceGroup, index) {
       if (_.isObject(instanceGroup)) {
-        instanceGroup.$folded = true;
-//          FoldStateManager.foldEditor(['instance_groups', index], true);
+        instanceGroup.$folded = !instanceGroup.$folded;
+        // FoldStateManager.foldEditor(['instance_groups', index], true);
       }
     });
   }
@@ -261,7 +261,7 @@ SwaggerEditor.controller('PreviewCtrl', function PreviewCtrl(Storage, Builder,
   function listAllVariables() {
     _.each($scope.specs.variables, function(variable, index) {
       if (_.isObject(variable)) {
-        variable.$folded = true;
+        variable.$folded = !variable.$folded;
       }
     });
   }

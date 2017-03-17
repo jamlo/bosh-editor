@@ -1,12 +1,13 @@
 <!--==================================================================-->
 <!--Variables-->
+<hr ng-if="specs.variables.length > 0" />
 <header ng-if="specs.variables.length > 0">
   <h3 class="section-header">
     <a ng-click="specs.variables.$folded = !specs.variables.$folded;">
       <span><strong>Variables ({{specs.variables.length}})</strong></span>
     </a>
-    <span class="on-hover">
-      <a ng-click="listAllVariables()">Collapse</a>
+    <span class="toggle">
+      <a ng-click="listAllVariables()">Toggle</a>
     </span>
   </h3>
 </header>
@@ -18,12 +19,18 @@
   <li
     class="operation"
     ng-repeat="variable in specs.variables"
-    ng-class="{password:'delete', certificate:'post', ssh:'get', rsa:'put'}[variable.type]">
+    ng-class="{password:'post', certificate:'get', ssh:'delete', rsa:'put'}[variable.type]">
 
     <header
       ng-click="variable.$folded = !variable.$folded;"
       ng-if="variable.name">
 
+      <span class="tags variable-type">
+          <span class="tag"
+                ng-class="{password:'tag-color-2', certificate:'tag-color-11', ssh:'tag-color-15', rsa:'tag-color-5'}[variable.type]">
+            {{variable.type}}
+          </span>
+      </span>
       <div
         class='http-method'
         class="toggleOperation">
@@ -36,13 +43,6 @@
       class='content'
       collapse-when="variable.$folded"
       ng-if="variable.name">
-      <div class="tags">
-        <span
-          class="tag"
-          ng-class="{'tag-color-0': variable.type==='errand', 'tag-color-2': variable.lifecycle!=='errand'}">
-          {{variable.type}}
-        </span>
-      </div>
 
       <section class="summary" ng-if="variable.options">
         <h4>Options</h4>

@@ -56,13 +56,20 @@ SwaggerEditor.service('KeywordMap', function KeywordMap(Preferences, defaults) {
     jobs: [dm_job]
   };
 
+  var dm_variable = {
+    name: String,
+    type: String,
+    options: Object,
+  };
+
   var deploymentManifestMap = {
     name: String,
     director_uuid: String,
     releases: [dm_release],
     stemcells: [dm_stemcell],
     update: dm_updateBlock,
-    instance_groups: [dm_instance_group]
+    instance_groups: [dm_instance_group],
+    variables: [dm_variable]
   };
 
   /**

@@ -1,5 +1,6 @@
 <!--==================================================================-->
 <!--Instance Groups-->
+<hr ng-if="specs.instance_groups.length > 0" />
 <header ng-if="specs.instance_groups.length > 0">
   <h3 class="section-header">
     <a ng-click="specs.instance_groups.$folded = !specs.instance_groups.$folded;">
@@ -7,8 +8,8 @@
       <span><strong>Instance Groups ({{specs.instance_groups.length}})</strong></span>
     </a>
 
-    <span class="on-hover">
-        <a ng-click="listAllInstanceGroups()">Collapse</a>
+    <span class="toggle">
+        <a ng-click="listAllInstanceGroups()">Toggle</a>
     </span>
   </h3>
 </header>
