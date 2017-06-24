@@ -1,9 +1,6 @@
 ---
 name: concourse
 
-# replace with `bosh status --uuid`
-director_uuid: REPLACE_ME
-
 releases:
 - name: concourse
   version: latest
@@ -26,8 +23,7 @@ instance_groups:
   - REPLACE_ME
   stemcell: trusty
   azs: [z1]
-  networks:
-  - name: private
+  networks: [{name: private}]
   jobs:
   - name: atc
     release: concourse
@@ -56,8 +52,7 @@ instance_groups:
   # replace with a disk type from your BOSH Director's cloud config
   persistent_disk_type: REPLACE_ME
   azs: [z1]
-  networks:
-  - name: private
+  networks: [{name: private}]
   jobs:
   - name: postgresql
     release: concourse
@@ -78,8 +73,7 @@ instance_groups:
   - REPLACE_ME
   stemcell: trusty
   azs: [z1]
-  networks:
-  - name: private
+  networks: [{name: private}]
   jobs:
   - name: groundcrew
     release: concourse

@@ -1,7 +1,5 @@
 name: jmeter-tornado-deployment
 
-director_uuid: REPLACE_ME
-
 releases:
 - name: jmeter-tornado
   version: latest
@@ -21,9 +19,19 @@ instance_groups:
   - name: REPLACE_ME
   jobs:
   - name: jmeter_tornado
+    release: jmeter-tornado
     properties:
-      test_plan_xml: |
-        {Your jmter JMX test plan goes here}
+      wizard:
+        configuration:
+          users: 50
+          ramp_time: 30
+        targets:
+        - name: GET with Headers
+          url: "http://api.example.com:8080/greeting/get/"
+          http_method: GET
+          headers:
+          - name: "Authorization"
+            value: "Basic Y2F0Om1lb3c="
 
 update:
   canaries: 5

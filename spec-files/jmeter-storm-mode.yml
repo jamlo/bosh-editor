@@ -1,7 +1,5 @@
 name: jmeter-storm-deployment
 
-director_uuid: REPLACE_ME
-
 releases:
 - name: jmeter-tornado
   version: latest
@@ -12,7 +10,7 @@ stemcells:
   version: latest
 
 instance_groups:
-- name: jmeter_workers
+- name: workers
   instances: 3
   vm_type: REPLACE_ME
   stemcell: trusty
@@ -20,7 +18,9 @@ instance_groups:
   networks:
   - name: REPLACE_ME
   jobs:
-  - name: jmeter_worker
+  - name: jmeter_storm_worker
+    release:  jmeter-tornado
+    properties: {}
 
 - name: storm
   instances: 1
@@ -32,10 +32,23 @@ instance_groups:
   - name: REPLACE_ME
   jobs:
   - name: jmeter_storm
+    release:  jmeter-tornado
     properties:
-      generate_dashboard: true
-      test_plan_xml: |
-        {Your jmeter JMX plan goes here}
+      wizard:
+        configuration:
+          users: 100
+          ramp_time: 30
+          duration: 300
+        targets:
+        - name: POST with Headers and Body
+          url: "http://api.example.com:8080/greeting/post/"
+          http_method: POST
+          headers:
+          - name: "Authorization"
+            value: "Basic Y2F0Om1lb3c="
+          options:
+            request_body: |
+              {"name" : "i am a post", "age" : 425}
 
 update:
   canaries: 5
